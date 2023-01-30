@@ -1,0 +1,23 @@
+/* Enter your custom styles here */
+html[dir='ltr'] .myAppDemo .myCustomBtn.sapMBtn {
+    margin-right: 0.125rem;
+}
+
+html[dir='rtl'] .myAppDemo .myCustomBtn.sapMBtn {
+    margin-left: 0.125rem;
+}
+
+.myAppDemo .myCustomText {
+    display: inline-block;
+    font-weight: bolder;
+}
+
+.navBarB {
+    margin-bottom: 120px;
+}
+
+.vBoxTopProfil{
+    margin: 100px 20px 20px 20px
+}
+
+

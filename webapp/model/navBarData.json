@@ -1,0 +1,17 @@
+{
+	"selectedKey": "page1",
+	"navigation": [
+		{
+			"title": "Raumbuchung",
+			"key": "page1"
+		},
+		{
+			"title": "Meine Buchungen",
+			"key": "page2"
+		},
+		{
+			"title": "Mein Profil",
+			"key": "page3"
+		}
+	]
+}

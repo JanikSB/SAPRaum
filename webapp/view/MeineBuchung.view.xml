@@ -1,0 +1,60 @@
+<mvc:View xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.ui.table" controllerName="raumreservierung.controller.MeineBuchung" displayBlock="true">
+    <m:Page showHeader="false" id="page">
+        <mvc:XMLView viewName="raumreservierung.view.NavBar" class="navBarB" />
+
+        <Table id="myTable" class="sapUiResponsiveMargin"  rows='{path: "/"}' visibleRowCount="10" width="" selectionMode="MultiToggle" >
+    
+
+            <extension>
+            
+                <m:HBox>
+                    <m:items>
+                        <m:Title text="Meine Buchungen" titleStyle="H3" class="sapUiTinyMarginBeginEnd"/>
+                    </m:items>
+
+                    <m:FacetFilter id="filter" >
+                        <m:FacetFilterList title="Raumnummer" listClose="onFilter">
+                            <m:FacetFilterItem text="1" key="1"/>
+                            <m:FacetFilterItem text="2" key="2"/>
+                            <m:FacetFilterItem text="3" key="3"/>
+                        </m:FacetFilterList>
+                        <m:FacetFilterList title="Status" listClose="onFilter">
+                            <m:FacetFilterItem text="laufend" key="läuft"/>
+                            <m:FacetFilterItem text="abgelaufen" key="abgelaufen"/>
+                            <m:FacetFilterItem text="gebucht" key="gebucht"/>
+                        </m:FacetFilterList>
+                    </m:FacetFilter>
+                </m:HBox>
+            </extension>
+            <columns>
+                <Column>
+                    <m:Label text="Raumnummer" />
+                    <template>
+                        <m:Text text='{raumnummer}'/>
+                    </template>
+                </Column>
+                <Column>
+                    <m:Label text="Vom" />
+                    <template>
+                        <m:Text text='{dateFrom}'/>
+                    </template>
+                </Column>
+                <Column>
+                    <m:Label text="Bis zum" />
+                    <template>
+                        <m:Text text='{dateTo}'/>
+                    </template>
+                </Column>
+                <Column>
+                    <m:Label text="Status" />
+                    <template>
+                        <m:Text text='{status}'/>
+                    </template>
+                </Column>
+            </columns>
+
+      
+        </Table>
+        <m:Button text="Buchung stornieren" class='sapUiMediumMargin' press="onCancelBooking"/>
+    </m:Page>
+</mvc:View>

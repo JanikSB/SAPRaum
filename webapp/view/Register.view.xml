@@ -1,0 +1,53 @@
+<mvc:View xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="raumreservierung.controller.Register" displayBlock="true">
+    <Page title="Register">
+        <HBox width="100%" id="registerHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center">
+            <items>
+                <VBox width="40%" direction="Column" id="registerVBox" height="100%" justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" alignContent="Center" >
+                    <items>
+                        <Title text="{i18n>welcomeReg}" level="H1" textAlign="Center" titleStyle="H1" class="sapUiSmallMarginBottom"/>
+                        <Panel xmlns="sap.m" id="registerPanel" backgroundDesign="Solid" height="100%" expanded="true">
+                            <headerToolbar>
+                                <Toolbar id="registerToolbar" design="Solid" width="100%" class="sapUiLargePadding">
+                                    <content>
+                                        <Image src="https://ui5.sap.com/resources/sap/ui/documentation/sdk/images/logo_sap.png" width="auto" id="image0" height="80%"/>
+                                    </content>
+
+                                    <ToolbarSpacer width="28%"/>
+
+                                    <Title text="{i18n>register}"/>
+
+                                    <ToolbarSpacer/>
+                                </Toolbar>
+                            </headerToolbar>
+
+                            <content>
+                                <Text xmlns="sap.m" id="text1_1668001937845" text="{i18n>userName}" class="sapUiTinyMarginTop"/>
+                                <Input xmlns="sap.m" id="input0_1668001901012" placeholder="Benutzername"/>
+
+                                <Text id="text0" text="{i18n>email}" class="sapUiTinyMarginTop"/>
+                                <Input xmlns="sap.m" id="registerEmail" type="Email" placeholder="sample@email.com"/>
+
+                                <Text xmlns="sap.m" text="{i18n>passwort}" id="text1" class="sapUiTinyMarginTop"/>
+                                <Input xmlns="sap.m" id="registerPasswort" required="true" placeholder="Passwort"/>
+
+                                <Text xmlns="sap.m" id="text5" text="{i18n>passwortRegBe}" class="sapUiTinyMarginTop"/>
+                                <Input xmlns="sap.m" id="input0" placeholder="Passwort bestätigen"/>
+
+                                <HBox width="100%" justifyContent="Center" class="sapUiTinyMarginTop">
+                                    <Button xmlns="sap.m" id="registerButton" width="auto" text="{i18n>registerButton}" type="Emphasized" class="sapUiTinyMarginTop"/>
+                                </HBox>
+
+                                <Toolbar width="auto" height="1px" class="sapUiSmallMargin"/>
+
+                                <HBox width="100%" justifyContent="Center" class="sapUiMediumMarginTop">
+                                    <Text text="{i18n>loginText}" class="sapUiSmallMarginEnd"/>
+                                    <Link text="{i18n>loginButtonReg}" press="onPressLog" id="registerButtonReg"/>
+                                </HBox>
+                            </content>
+                        </Panel>
+                    </items>
+                </VBox>
+            </items>
+        </HBox>
+    </Page>
+</mvc:View>

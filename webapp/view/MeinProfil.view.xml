@@ -1,0 +1,55 @@
+<mvc:View xmlns:uxap="sap.uxap" xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" controllerName="raumreservierung.controller.Profil" displayBlock="true">
+    <Page showHeader="false" id="page">
+        <mvc:XMLView viewName="raumreservierung.view.NavBar" class="navBarB"/>
+        
+
+        <VBox class="vBoxTopProfil">
+        <f:Form id="FormDisplay354wideDual" editable="false" >
+            <f:title>
+                <core:Title text="Profilinformation"/>
+            </f:title>
+            <f:layout>
+                <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer title="Meine Person">
+                    <f:formElements>
+                        <f:FormElement label="Name">
+                            <f:fields>
+                                <Text text="{/username}" id="nameText"/>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Standort">
+                            <f:fields>
+                                <Text text="Kassel"/>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Abteil">
+                            <f:fields>
+                                <Text text="Softwareentwicklung"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+                <f:FormContainer title="Mein Konto">
+                    <f:formElements>
+                        <f:FormElement label="Benutzer-ID">
+                            <f:fields>
+                                <Text text="{/userid}"/>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Meine E-Mail Adresse">
+                            <f:fields>
+                                <Text text="{/email}"/>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+    </VBox>
+
+        
+
+    </Page>
+</mvc:View>

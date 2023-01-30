@@ -1,0 +1,185 @@
+{
+  "_version": "1.42.0",
+  "sap.app": {
+    "id": "raumreservierung",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.8.0",
+      "toolsId": "f798d220-1cb8-4c8c-93d1-331b56174613"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/srv",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.102.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "raumreservierung.i18n.i18n",
+          "supportedLocales": [""],
+          "fallbackLocale": ""
+        }
+      },
+      "Model": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "groupId": "$direct"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "raumreservierung.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "anmeldung",
+          "pattern": "",
+          "target": [
+            "login"
+          ]
+        },
+        {
+          "name": "register",
+          "pattern": "registrierung",
+          "target": [
+            "register"
+          ]
+        },
+        {
+          "name": "raumbuchung",
+          "pattern": "raumbuchung",
+          "target": [
+            "raumbuchung"
+          ]
+        },
+        {
+          "name": "buchungen",
+          "pattern": "buchungen",
+          "target": [
+            "buchungen"
+          ]
+        },
+        {
+          "name": "profil",
+          "pattern": "profil",
+          "target": [
+            "profil"
+          ]
+        }
+      ],
+      "targets": {
+        "login":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "login",
+          "viewName": "Login"
+        },
+        "register":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "register",
+          "viewName": "Register"
+        },
+        "raumbuchung":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "raumbuchung",
+          "viewName": "Raumbuchung"
+        },
+        "buchungen":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "buchungen",
+          "viewName": "MeineBuchung"
+        },
+        "profil":{
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "profil",
+          "viewName": "MeinProfil"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "raumreservierung.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

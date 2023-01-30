@@ -1,0 +1,62 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m" 
+xmlns:layout= "sap.ui.layout"
+controllerName="raumreservierung.controller.NavBar" 
+displayBlock="true"
+xmlns:tnt="sap.tnt"> 
+     <tnt:ToolPage id="toolPage">
+		
+		<!-- <tnt:header>
+			<tnt:ToolHeader>
+				<Image height="1.5rem"
+					   class="sapUiSmallMarginBegin"
+					   src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg" />
+
+				<Title level="H1" text="Raumreservierung">
+					<layoutData>
+						<OverflowToolbarLayoutData shrinkable="true" />
+					</layoutData>
+				</Title>
+				
+				<ToolbarSpacer>
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px" />
+					</layoutData>
+				</ToolbarSpacer>
+
+				<tnt:ToolHeaderUtilitySeparator />
+
+				<OverflowToolbarButton text="Notifications" tooltip="Notifications" icon="sap-icon://bell" type="Transparent" />
+				<Avatar src="test-resources/sap/tnt/images/John_Miller.png"
+						displaySize="XS">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Avatar>
+
+			</tnt:ToolHeader>
+		</tnt:header> -->
+
+
+		<tnt:subHeader>
+				<IconTabBar headerMode="Inline" select=".onSelectWindow" class="sapUiResponsiveContentPadding" expandable="false" expanded="false">
+						<items>
+							<IconTabFilter key="raumbuchung" text="Raumbuchung" />
+							<IconTabFilter key="buchungen" text="Meine Buchungen" />
+							<IconTabFilter key="profil" text="Mein Profil" />
+
+							<IconTabSeparator />
+
+							<IconTabFilter key='logout' text="Sign Out" icon='sap-icon://log' class="sapUiLargeMargin"/>
+						</items>
+				</IconTabBar>
+		</tnt:subHeader>
+        
+    </tnt:ToolPage>
+
+	
+
+    
+    
+</mvc:View>

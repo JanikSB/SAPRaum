@@ -1,0 +1,64 @@
+<mvc:View xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="raumreservierung.controller.Raumbuchung" displayBlock="true">
+    <Page showHeader="false">
+        <mvc:XMLView viewName="raumreservierung.view.NavBar" />
+        <HBox width="100%" id="raumbuchungHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="SpaceAround">
+            <items>
+                <VBox id="buchungLinks" width="30%" class='sapUiMediumMarginLeft'>
+                    <items>
+                        <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" />
+                        <Select id="selectRaum" showSecondaryValues="true" items="{path: 'Model>/ROOMS'}" autoAdjustWidth="true">
+                            <core:ListItem text="Raum {Model>raumnummer}" additionalText="Plätze: {Model>platzanzahl}, &#10; Inhalt: {Model>inhalt}" />
+                        </Select>
+
+                        <Title text="{i18n>selectZeit}" class="sapUiSmallMarginTop" />
+                        <Label text="{i18n>selectZeitVon}" />
+                        <DateTimePicker id="selectVon" displayFormat="short" width="50%" />
+                        <Label text="{i18n>selectZeitBis}" />
+                        <DateTimePicker id="selectBis" displayFormat="short" class="sapUiSmallMarginBottom" width="50%" />
+
+                        <Title text="{i18n>selectArbeit}" />
+                        <HBox width="100%" justifyContent="SpaceBetween">
+                            <Select id="selectArbeit" autoAdjustWidth="true" class='sapUiSmallMarginLeft'>
+                                <core:ListItem text="Büroarbeit" key="bueroarbeit" />
+                                <core:ListItem text="Präsentation" key="praesentation" />
+                            </Select>
+                            <Switch state="true" customTextOn=" " customTextOff=" " change="switch">
+                                <layoutData>
+                                    <FlexItemData growFactor="1" maxWidth="60%" />
+                                </layoutData>
+                            </Switch>
+                        </HBox>
+
+                        <Button text="{i18n>knopfBuchen}" type="Emphasized" class='sapUiLargeMarginTop' press="bookRoom" />
+                    </items>
+                </VBox>
+
+                <VBox id="buchungRechts" width="60%" height="80%" justifyContent="Center">
+                    <items>
+                        <PlanningCalendar id='raumKalender' rows='{path: "/"}' appointmentsVisualization="Filled" showWeekNumbers="true" height="100%" builtInViews="Hour,Day">
+                            <toolbarContent>
+                                <Title text='Buchungsübersicht' />
+                            </toolbarContent>
+
+                            <rows>
+                                <PlanningCalendarRow title="Raum {roomnumber}" appointments='{bookings}' >
+                                    <appointments>
+                                        <unified:CalendarAppointment startDate="{start}" endDate="{end}" title="Gebucht von {booker}" />
+                                    </appointments>
+                                </PlanningCalendarRow>
+                            </rows>
+                        </PlanningCalendar>
+
+                        <!-- <List
+                            headerText="Products"
+                            items="{data>/}" >
+                            <StandardListItem
+                                title="{data>roomnumber}"
+                                />
+                        </List> -->
+                    </items>
+                </VBox>
+            </items>
+        </HBox>
+    </Page>
+</mvc:View>

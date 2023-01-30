@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="BOOKINGHISTORY" EntityType="CatalogService.BOOKINGHISTORY"/>
+                <EntitySet Name="BOOKINGS" EntityType="CatalogService.BOOKINGS"/>
+                <EntitySet Name="ROOMS" EntityType="CatalogService.ROOMS"/>
+                <EntitySet Name="USERS" EntityType="CatalogService.USERS"/>
+            </EntityContainer>
+            <EntityType Name="BOOKINGHISTORY">
+                <Property Name="bookername" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="raumnummer" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="datetimefrom" Type="Edm.DateTimeOffset" Precision="7" Nullable="false"/>
+                <Property Name="datetimeto" Type="Edm.DateTimeOffset" Precision="7" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="BOOKINGS">
+                <Key>
+                    <PropertyRef Name="bookingid"/>
+                </Key>
+                <Property Name="bookingid" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="bookername" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="raumnummer" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="datetimefrom" Type="Edm.DateTimeOffset" Precision="7" Nullable="false"/>
+                <Property Name="datetimeto" Type="Edm.DateTimeOffset" Precision="7" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="ROOMS">
+                <Key>
+                    <PropertyRef Name="raumnummer"/>
+                </Key>
+                <Property Name="raumnummer" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="platzanzahl" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="inhalt" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="USERS">
+                <Key>
+                    <PropertyRef Name="userid"/>
+                </Key>
+                <Property Name="userid" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="username" Type="Edm.String" MaxLength="50"/>
+                <Property Name="email" Type="Edm.String" MaxLength="50"/>
+                <Property Name="passwort" Type="Edm.String" MaxLength="50" Nullable="false"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
