@@ -1,20 +1,20 @@
 <mvc:View xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="raumreservierung.controller.Raumbuchung" displayBlock="true">
-    <Page showHeader="false">
-        <mvc:XMLView viewName="raumreservierung.view.NavBar" />
+    <Page showHeader="false" id="raumbuchungPage">
+        <mvc:XMLView viewName="raumreservierung.view.NavBar" id="mcvNavBar" />
         <HBox width="100%" id="raumbuchungHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="SpaceAround">
             <items>
                 <VBox id="buchungLinks" width="30%" class='sapUiMediumMarginLeft'>
                     <items>
-                        <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" />
+                        <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" id="titleRaumauswahl"/>
                         <Select id="selectRaum" showSecondaryValues="true" items="{path: 'Model>/ROOMS'}" autoAdjustWidth="true">
                             <core:ListItem text="Raum {Model>raumnummer}" additionalText="Plätze: {Model>platzanzahl}, &#10; Inhalt: {Model>inhalt}" />
                         </Select>
 
                         <Title text="{i18n>selectZeit}" class="sapUiSmallMarginTop" />
-                        <Label text="{i18n>selectZeitVon}" />
-                        <DateTimePicker id="selectVon" displayFormat="short" width="50%" />
-                        <Label text="{i18n>selectZeitBis}" />
-                        <DateTimePicker id="selectBis" displayFormat="short" class="sapUiSmallMarginBottom" width="50%" />
+                        <Label text="{i18n>selectZeitVon}" labelFor="selectVon"/>
+                        <DateTimePicker id="selectVon" displayFormat="short" width="50%" minutesStep="30" required="true"/>
+                        <Label text="{i18n>selectZeitBis}" labelFor="selectBis"/>
+                        <DateTimePicker id="selectBis" displayFormat="short" class="sapUiSmallMarginBottom" width="50%" minutesStep="30" required="true" />
 
                         <Title text="{i18n>selectArbeit}" />
                         <HBox width="100%" justifyContent="SpaceBetween">
@@ -41,7 +41,7 @@
                             </toolbarContent>
 
                             <rows>
-                                <PlanningCalendarRow title="Raum {roomnumber}" appointments='{bookings}' >
+                                <PlanningCalendarRow title="Raum {roomnumber}" appointments='{bookings}'>
                                     <appointments>
                                         <unified:CalendarAppointment startDate="{start}" endDate="{end}" title="Gebucht von {booker}" />
                                     </appointments>

@@ -1,54 +1,25 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     'sap/ui/model/json/JSONModel',
-    'sap/m/MessageToast'
-], function(Controller, JSONModel, MessageToast) {
+    'sap/m/MessageToast',
+    "sap/ui/core/EventBus"
+], function(Controller, JSONModel, MessageToast, EventBus) {
     'use strict';
 
     var calendarList = [];
     var omodel;
     var newBookingId;
+    var that;
 
 
     return Controller.extend('raumreservierung.controller.Raumbuchung', {
         
         onInit(){
-           var oSelect = this.byId('selectRaum');
-           oSelect.setColumnRatio('1:4');
+            var oSelect = this.byId('selectRaum');
+            oSelect.setColumnRatio('1:4');
 
-           omodel = this.getOwnerComponent().getModel('Model');
-
-        //    omodel.read('/ROOMS', {
-
-        //         success: function (res) {
-        //             var odatares = res.results;
-
-        //             object.populateRooms(odatares);
-
-                    
-        //         }
-        //     })
-
-            // omodel.read('/BOOKINGS', {
-
-            //     success: function (res) {
-            //         var odatares = res.results;
-
-            //         object.populateBookings(odatares);
-
-                    
-
-            //     }
-            // })
-            // this.readRooms().then(function (data){
-            //     return that.readBookings();
-            // }).then(function(data){
-
-                
-            // }).catch(function(error){
-                
-            // })
-            var that = this;
+            omodel = this.getOwnerComponent().getModel('Model');
+            that = this;
 
             var promise = [];
             promise.push(this.readRooms(omodel));
@@ -63,22 +34,14 @@ sap.ui.define([
                 var newModel = new JSONModel();
                 newModel.setData(calendarList);
                 that.getView().setModel(newModel);
-
-
-                // var newModel = new JSONModel();
-                // newModel.setData(calendarList);
-                // that.getView().setModel(newModel, 'data');
-
-                // console.log(that.getView().getModel('data').getData());
                 
             }).catch(function(error){
             });
-
-
-            
-            
         },
 
+
+
+        //FUNKTIONEN UM DATEN AUSZULESEN UND ZU SPEICHERN
         //buchungen aus db auslesen und in model laden
         readBookings(omodel) {
             return new Promise(function (resolve, reject) {
@@ -88,8 +51,13 @@ sap.ui.define([
 
                         resolve(oBookings);
 
-                        let lastBooking = oBookings[oBookings.length - 1];
-                        newBookingId = lastBooking.bookingid + 1;
+                        if(oBookings.length == 0){
+                            newBookingId = 1;
+                        }else{
+                            let lastBooking = oBookings[oBookings.length - 1];
+                            newBookingId = lastBooking.bookingid + 1;
+                        }
+                        
                     },
                     error: function (oError) {            
                         reject(oError);
@@ -98,7 +66,6 @@ sap.ui.define([
             });    
         },
 
-        //FUNKTIONEN UM DATEN AUSZULESEN UND SPEICHERN
         //raeume aus db auslesen und in model laden
         readRooms(omodel) {
             return new Promise(function (resolve, reject) {
@@ -171,62 +138,77 @@ sap.ui.define([
             console.log(calendarList);
         },
 
+
+
         //BUCHUNGSFUNKTIONEN:
         //werte von den buchungskomponenten auslesen, abgleichen und in model(DB) schreiben
         bookRoom () {
-            var selecterRoom = this.byId('selectRaum');
-            var selecterFrom = this.byId('selectVon');
-            var selecterTo = this.byId('selectBis');
-            var selecterWork = this.byId('selectArbeit')
-
-            var room = selecterRoom.getSelectedItem().getText();
-            var dateTimeFrom = selecterFrom.getValue();
-            var dateTimeTo = selecterTo.getValue();
-            var roomFree;
-
-            omodel = this.getOwnerComponent().getModel('Model');
-
             var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.local);
             var localName = oStore.get('logUser').username;
-            var oContext = omodel.createEntry('BOOKINGS');
 
-            var that = this;
+            //daten aus Auswahl
+            var room = this.byId('selectRaum').getSelectedItem().getText().substring(5);
+            var dateTimeFrom = new Date(this.byId('selectVon').getValue());
+            var dateTimeTo = new Date(this.byId('selectBis').getValue());
+            var selecterWork = this.byId('selectArbeit')
+
+            //checker value to verify if room free
+            var roomFree;
+
+            var newModel = this.getView().getModel();
+            var currentData = newModel.getData();
             
-
-            console.log(room)
-            console.log(dateTimeFrom)
-            console.log(dateTimeTo)
-
-            var dateFrom = new Date(dateTimeFrom);
-            var dateTo = new Date(dateTimeTo);
+            var oContext = omodel.createEntry('BOOKINGS');
         
 
-            //wenn zeiten ausgewaehlt
-            if (dateTimeFrom && dateTimeTo){
-                console.log('zeit ausgewaehlt')
+            //if zeiten ausgewaehlt
+            if (dateTimeFrom.getTime() === dateTimeFrom.getTime() && dateTimeTo.getTime() === dateTimeTo.getTime()){
+                console.log('zeit auswahl erfolgreich')
+
                 roomFree = this.verifyBooking(dateTimeFrom, dateTimeTo, room);
 
                 //wenn raeume frei sind (in funktion 'verify booking' gecheckt)
                 if(roomFree){
+                    //Arbeitsauswahl pruefen
                     var selectedWork;
                     if(selecterWork.getEnabled()){
-
                         selectedWork = selecterWork.getSelectedItem().getText();
-                        console.log(selecterWork.getSelectedItem().getText() + ': mit Arbeitsauswahl buchen')
-
-                        //spalte in DB hinzufuegen:
-                             //omodel.setProperty('work', selectedWork, oContext);
+                        console.log(selecterWork.getSelectedItem().getText() + ': mit Arbeitsauswahl buchen');   
                     }
+
+                    //Buchung in DB hinzufuegen:
                     omodel.setProperty('bookingid', newBookingId, oContext);
                     omodel.setProperty('bookername', localName, oContext);
-                    omodel.setProperty('raumnummer', room.substring(5), oContext);
-                    omodel.setProperty('datetimefrom', dateFrom, oContext);
-                    omodel.setProperty('datetimeto', dateTo, oContext);
+                    omodel.setProperty('raumnummer', room, oContext);
+                    omodel.setProperty('datetimefrom', dateTimeFrom, oContext);
+                    omodel.setProperty('datetimeto', dateTimeTo, oContext);
 
                     omodel.submitChanges();
 
+                    var oEventBus = sap.ui.getCore().getEventBus();
+                    oEventBus.publish('channel1', 'event1');
+
+
                     MessageToast.show('Erfolgreich gebucht!')
-                    location.reload();
+
+                    newBookingId++;
+
+                    let newBookingData = {
+                        start: dateTimeFrom,
+                        end: dateTimeTo,
+                        booker: localName
+                    }
+
+                    for (let i=0; i<currentData.length; i++){
+                        if(currentData[i].roomnumber === room){
+                            currentData[i].bookings.push(newBookingData);
+                            break;
+                        } 
+                    }
+
+                    newModel.setData(currentData);
+                    this.getView().setModel(newModel)
+
                 }else {
                     MessageToast.show('Raum zu dieser Zeit bereits gebucht')
                 }
@@ -237,24 +219,27 @@ sap.ui.define([
         },
 
         //ausgewaehlte zeiten abgleichen und bool roomFree zurueckgeben
-        verifyBooking(dateFromString, dateToString, roomNumberString){
-
-            var dateFrom = new Date(dateFromString);
-            var dateTo = new Date(dateToString);
-            var roomNumber = roomNumberString.substring(5);
+        verifyBooking(selectedDateFrom, selectedDateTo, roomNumberString){
+            //return value
             var roomFree = true
 
+            //new booking values
+            var dateFrom = selectedDateFrom.getTime();
+            var dateTo = selectedDateTo.getTime();
+
+            //existing bookings values
+            var newModel = this.getView().getModel();
+            var currentData = newModel.getData();
         
             
-            //if condition ueberarbeiten
-            for(let i = 0; i < calendarList[roomNumber - 1].bookings.length; i++){
-                var calendarDateFrom = new Date(calendarList[roomNumber - 1].bookings[i].start);
-                var calendarDateTo = new Date(calendarList[roomNumber - 1].bookings[i].end)
+            for(let i = 0; i < currentData[roomNumberString - 1].bookings.length; i++){
+                let existingDateFrom = currentData[roomNumberString-1].bookings[i].start.getTime();
+                let existingDateTo =currentData[roomNumberString-1].bookings[i].end.getTime();
 
-                if(dateFrom == calendarDateFrom ||
-                     dateTo == calendarDateTo ||
-                      ((dateFrom > calendarDateFrom) && (dateFrom < calendarDateTo)) ||
-                       ((dateTo > calendarDateFrom) && (dateTo < calendarDateTo))) {
+                if(dateFrom == existingDateFrom ||
+                     dateTo == existingDateTo ||
+                      ((dateFrom > existingDateFrom) && (dateFrom < existingDateTo)) ||
+                       ((dateTo > existingDateFrom) && (dateTo < existingDateTo))) {
                     roomFree = false;
                     console.log('raum zu der zeit belegt: if abfrage')
                 } 
@@ -266,7 +251,6 @@ sap.ui.define([
         populateCalendar(){
             
         },
-
 
         //NEBENFUNKTIONEN
         //switch status auf selectArbeit uebertragen (on/ off)

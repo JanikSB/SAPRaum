@@ -1,5 +1,5 @@
 <mvc:View xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="raumreservierung.controller.Login" displayBlock="true">
-    <Page title="Login">
+    <Page title="Login" id="loginPage">
         <HBox width="100%" id="loginHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center">
             <items>
                 <VBox width="40%" direction="Column" id="loginVBox" height="100%" justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" alignContent="Center">

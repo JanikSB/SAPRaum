@@ -6,13 +6,12 @@
     
 
             <extension>
-            
                 <m:HBox>
                     <m:items>
                         <m:Title text="Meine Buchungen" titleStyle="H3" class="sapUiTinyMarginBeginEnd"/>
                     </m:items>
 
-                    <m:FacetFilter id="filter" >
+                    <m:FacetFilter id="filter" showReset="false">
                         <m:FacetFilterList title="Raumnummer" listClose="onFilter">
                             <m:FacetFilterItem text="1" key="1"/>
                             <m:FacetFilterItem text="2" key="2"/>
@@ -26,6 +25,9 @@
                     </m:FacetFilter>
                 </m:HBox>
             </extension>
+
+
+
             <columns>
                 <Column>
                     <m:Label text="Raumnummer" />
@@ -55,6 +57,10 @@
 
       
         </Table>
+
+
         <m:Button text="Buchung stornieren" class='sapUiMediumMargin' press="onCancelBooking"/>
+
+        
     </m:Page>
 </mvc:View>
