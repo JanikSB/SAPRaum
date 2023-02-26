@@ -17,7 +17,7 @@
                             <m:FacetFilterItem text="2" key="2"/>
                             <m:FacetFilterItem text="3" key="3"/>
                         </m:FacetFilterList>
-                        <m:FacetFilterList title="Status" listClose="onFilter">
+                        <m:FacetFilterList title="Status" listClose="onFilter" >
                             <m:FacetFilterItem text="laufend" key="läuft"/>
                             <m:FacetFilterItem text="abgelaufen" key="abgelaufen"/>
                             <m:FacetFilterItem text="gebucht" key="gebucht"/>
@@ -25,36 +25,6 @@
                     </m:FacetFilter>
                 </m:HBox>
             </extension>
-
-
-
-            <!-- <columns>
-                <Column>
-                    <m:Label text="Raumnummer" />
-                    <template>
-                        <m:Text text='{Model>raumnummer}'/>
-                    </template>
-                </Column>
-                <Column>
-                    <m:Label text="Vom" />
-                    <template>
-                        <m:Text text='{Model>datetimefrom}'/>
-                    </template>
-                </Column>
-                <Column>
-                    <m:Label text="Bis zum" />
-                    <template>
-                        <m:Text text='{Model>datetimeto}'/>
-                    </template>
-                </Column>
-                <Column>
-                    <m:Label text="Status" />
-                    <template>
-                        <m:Text text='{Model>status}'/>
-                    </template>
-                </Column>
-            </columns> -->
-
       
         </Table>
 

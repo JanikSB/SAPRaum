@@ -142,7 +142,7 @@ sap.ui.define([
                         aFilters.push(new sap.ui.model.Filter("raumnummer", "EQ", sKey));
                     } 
 
-                    //STATUS AENDERN -----------------------------------------
+                    // STATUS AENDERN -----------------------------------------
                     else if (sTitle === "Status") {
                         aFilters.push(new sap.ui.model.Filter("status", "EQ", sKey));
                     }

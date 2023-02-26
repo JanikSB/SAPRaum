@@ -5,16 +5,16 @@
             <items>
                 <VBox id="buchungLinks" width="30%" class='sapUiMediumMarginLeft'>
                     <items>
-                        <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" id="titleRaumauswahl"/>
+                        <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" id="titleRaumauswahl" />
                         <Select id="selectRaum" showSecondaryValues="true" items="{path: 'Model>/ROOMS'}" autoAdjustWidth="true">
                             <core:ListItem text="Raum {Model>raumnummer}" additionalText="Plätze: {Model>platzanzahl}, &#10; Inhalt: {Model>inhalt}" />
                         </Select>
 
                         <Title text="{i18n>selectZeit}" class="sapUiSmallMarginTop" />
-                        <Label text="{i18n>selectZeitVon}" labelFor="selectVon"/>
-                        <DateTimePicker id="selectVon" displayFormat="dd.MM.yy HH"  width="50%" required="true" change="onSelectVon"/>
-                        <Label text="{i18n>selectZeitBis}" labelFor="selectBis"/>
-                        <DateTimePicker id="selectBis" displayFormat="dd.MM.yy HH"  class="sapUiSmallMarginBottom" width="50%" required="true" />
+                        <Label text="{i18n>selectZeitVon}" labelFor="selectVon" />
+                        <DateTimePicker id="selectVon" displayFormat="dd.MM.yy HH" width="50%" required="true" change="onSelectVon" />
+                        <Label text="{i18n>selectZeitBis}" labelFor="selectBis" />
+                        <DateTimePicker id="selectBis" displayFormat="dd.MM.yy HH" class="sapUiSmallMarginBottom" width="50%" required="true" />
 
                         <!-- <Title text="{i18n>selectArbeit}" /> -->
                         <!-- <HBox width="100%" justifyContent="SpaceBetween">
@@ -35,28 +35,16 @@
 
                 <VBox id="buchungRechts" width="60%" height="80%" justifyContent="Center">
                     <items>
-                        <PlanningCalendar id='raumKalender' rows='{path: "Model>/ROOMS"}' appointmentsVisualization="Filled" showWeekNumbers="true" height="100%" builtInViews="Hour,Day">
+                        <PlanningCalendar id='raumKalender' rows='{path: "Model>/ROOMS"}' appointmentsVisualization="Filled" showWeekNumbers="true" height="100%" builtInViews="Hour,Day" >
                             <toolbarContent>
                                 <Title text='Buchungsübersicht' />
                             </toolbarContent>
 
                             <rows>
-                                <PlanningCalendarRow title="Raum {Model>raumnummer}" appointments='{
-                                            path: "Model>/BOOKINGS"}' >
-                                    <appointments>
-                                        <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>booker}"/>
-                                    </appointments>
+                                <PlanningCalendarRow title="Raum{Model>raumnummer}" >
                                 </PlanningCalendarRow>
                             </rows>
                         </PlanningCalendar>
-
-                        <!-- <List
-                            headerText="Products"
-                            items="{data>/}" >
-                            <StandardListItem
-                                title="{data>roomnumber}"
-                                />
-                        </List> -->
                     </items>
                 </VBox>
             </items>
