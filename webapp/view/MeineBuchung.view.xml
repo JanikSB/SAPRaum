@@ -2,7 +2,7 @@
     <m:Page showHeader="false" id="page">
         <mvc:XMLView viewName="raumreservierung.view.NavBar" class="navBarB" />
 
-        <Table id="myTable" class="sapUiResponsiveMargin"  rows='{path: "/"}' visibleRowCount="10" width="" selectionMode="MultiToggle" >
+        <Table id="myTable" class="sapUiResponsiveMargin" visibleRowCount="10" width="" selectionMode="MultiToggle" >
     
 
             <extension>
@@ -28,32 +28,32 @@
 
 
 
-            <columns>
+            <!-- <columns>
                 <Column>
                     <m:Label text="Raumnummer" />
                     <template>
-                        <m:Text text='{raumnummer}'/>
+                        <m:Text text='{Model>raumnummer}'/>
                     </template>
                 </Column>
                 <Column>
                     <m:Label text="Vom" />
                     <template>
-                        <m:Text text='{dateFrom}'/>
+                        <m:Text text='{Model>datetimefrom}'/>
                     </template>
                 </Column>
                 <Column>
                     <m:Label text="Bis zum" />
                     <template>
-                        <m:Text text='{dateTo}'/>
+                        <m:Text text='{Model>datetimeto}'/>
                     </template>
                 </Column>
                 <Column>
                     <m:Label text="Status" />
                     <template>
-                        <m:Text text='{status}'/>
+                        <m:Text text='{Model>status}'/>
                     </template>
                 </Column>
-            </columns>
+            </columns> -->
 
       
         </Table>

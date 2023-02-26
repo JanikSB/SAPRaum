@@ -21,6 +21,10 @@ sap.ui.define([
             var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.local);
             localId = oStore.get('logUser').userid;
 
+            if(!localId){
+             oRouter.navTo('anmeldung');
+            }
+
             var omodel = this.getOwnerComponent().getModel('Model');
 
             omodel.read('/USERS', {

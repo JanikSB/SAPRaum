@@ -1,123 +1,126 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    'sap/ui/model/json/JSONModel',
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     'sap/m/MessageToast',
-    "sap/ui/core/EventBus"
-], function (Controller, JSONModel, MessageToast, EventBus) {
+    "sap/ui/core/format/DateFormat",
+
+
+    "sap/ui/commons/Label",
+    "sap/ui/commons/TextView",
+    "sap/ui/table/Column"
+], function (Controller, Filter, FilterOperator, MessageToast, DateFormat, Label, TextView, Column) {
     'use strict';
 
 
     var localName;
     var that;
+    var oModel;
 
 
 
     return Controller.extend('raumreservierung.controller.MeineBuchung', {
-        readBookings(){
-            var newModel = new JSONModel();
-
-            var omodel = this.getOwnerComponent().getModel('Model');
-
-            omodel.read('/BOOKINGS', {
-                filters: [
-                    new sap.ui.model.Filter({
-                        path: "bookername",
-                        operator: sap.ui.model.FilterOperator.EQ,
-                        value1: localName
-                    })
-                ],
-
-                success: function (res) {
-                    var odatares = res.results;
-
-                    console.log(odatares)
-
-                    //neues array mit formattierten omodel daten erstellt
-                    var newArray = that.bookingDateFormatter(odatares)
-
-                    //array als model festlegen
-                    newModel.setData(newArray);
-
-                    that.getView().setModel(newModel)
-                }
-            })
-        },
-
 
         onInit() {
-
             that = this;
-
-            
 
             //userdaten aus local storage auslesen (vom eingelogten user)
             var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.local);
             localName = oStore.get('logUser').username;
 
+            if(!localName){
+                oRouter.navTo('anmeldung');
+              }
+
             //odata model auslesen
             this.readBookings();
-            var oEventBus = sap.ui.getCore().getEventBus();
-            oEventBus.subscribe("channel1", "event1", this.readBookings, this);
         },
 
 
+        //tabelle mit eigenen buchungen fuellen
+        readBookings(){
 
-        //Buchungen dates zu strings & status erstellen
-        bookingDateFormatter(bookingObjectArray) {
+            var oTable = this.getView().byId('myTable');
 
-            var timeFromOld;
-            var timeToOld;
+            oTable.bindRows({
+                path: "Model>/BOOKINGS",
+                //set the filter for the bookername property
+                filters: [
+                    new Filter("bookername", FilterOperator.EQ, localName)
+                ],
+                parameters: {
+                    //set the count mode to inline to get the number of records for paging
+                    countMode: 'Inline'
+                }
+            });
 
-            var dateString;
-            var timeString;
+            oTable.addColumn(new Column({
+                label: new Label({text: "Raumnummer"}),
+                template: new TextView({
+                    text: '{Model>raumnummer}'})
+            }));
+            
+            //add a column for the 'datetimefrom' property
+            oTable.addColumn(new Column({
+                label: new Label({text: "Von"}),
+                template: new TextView({
+                    text: 
+                    {parts: [{path: 'Model>datetimefrom'}],
+                    formatter: that.dateFormatter.bind(this)
+                }})
+            }));
+            
+            //add a column for the 'datetimeto' property
+            oTable.addColumn(new Column({
+                label: new Label({text: "Bis"}),
+                template: new TextView({
+                    text: 
+                    {parts: [{path: 'Model>datetimeto'}],
+                    formatter: that.dateFormatter.bind(this)
+                }})
+            }));
 
-            var roomnumber;
-            var timeFromNew;
-            var timeToNew;
+            oTable.addColumn(new Column({
+                label: new Label({text: 'Status'}),
+                template: new TextView({
+                    text:
+                    {parts: ['Model>datetimefrom', 'Model>datetimeto'],
+                    formatter: (datetimefrom, datetimeto) => {
+                        return that.statusFormatter(datetimefrom, datetimeto);
+                    }
+                }})
+            }))
+
+            oTable.addColumn(new Column({
+                label: new Label({text: 'Buchungsnummer'}),
+                template: new TextView({
+                    text: '{Model>bookingid}'}),
+                visible: false
+            }))
+        },
+
+        //datum zu lesbarem string formattieren
+        dateFormatter(date){
+            const format = DateFormat.getDateTimeInstance({pattern: "dd.MM.yyyy HH:mm"});
+            var strDate = format.format(new Date(date));
+            return strDate;
+        },
+
+        //status aus datetimefrom und datetimeto erschliessen
+        statusFormatter(dateFrom, dateTo){
             var status;
 
-            var newObjectArray = [];
-
-            for (var i = 0; i < bookingObjectArray.length; i++) {
-
-                //zeit von & zeit bis vom odata model auslesen
-                timeFromOld = new Date(bookingObjectArray[i].datetimefrom);
-                timeToOld = new Date(bookingObjectArray[i].datetimeto);
-
-                //dates zu strings formattieren
-                dateString = timeFromOld.toLocaleDateString();
-                timeString = timeFromOld.toLocaleTimeString();
-
-                timeFromNew = dateString + ' ' + timeString;
-
-                dateString = timeToOld.toLocaleDateString();
-                timeString = timeToOld.toLocaleTimeString();
-
-                timeToNew = dateString + ' ' + timeString;
-
-
-                //status anhand der zeit erstellen
-                var now = new Date();
-                if (now >= timeFromOld && now <= timeToOld) {
-                    status = 'läuft'
-                } else if (now < timeFromOld) {
-                    status = 'gebucht'
-                } else if (now > timeToOld) {
-                    status = 'abgelaufen'
-                }
-
-                roomnumber = bookingObjectArray[i].raumnummer
-
-
-                //neues objekt erstellen und im array (neues model) speichern
-                newObjectArray[i] = {
-                    raumnummer: roomnumber,
-                    dateFrom: timeFromNew,
-                    dateTo: timeToNew,
-                    status: status
-                }
+            var now = new Date();
+            if (now >= dateFrom && now <= dateTo) {
+                status = 'läuft'
+            } else if (now < dateFrom) {
+                status = 'gebucht'
+            } else if (now > dateTo) {
+                status = 'abgelaufen'
             }
-            return newObjectArray;
+
+
+            return status;
         },
 
 
@@ -137,10 +140,15 @@ sap.ui.define([
                     var sKey = aSelectedItems[i].getKey();
                     if (sTitle === "Raumnummer") {
                         aFilters.push(new sap.ui.model.Filter("raumnummer", "EQ", sKey));
-                    } else if (sTitle === "Status") {
+                    } 
+
+                    //STATUS AENDERN -----------------------------------------
+                    else if (sTitle === "Status") {
                         aFilters.push(new sap.ui.model.Filter("status", "EQ", sKey));
                     }
                 }
+
+                
                 // filters beim tabellen binding anwenden
                 oBinding.filter(aFilters);
             } else {
@@ -151,37 +159,35 @@ sap.ui.define([
 
         //Buchung löschen/ stornieren
         onCancelBooking(){
-            var model = this.getView().getModel();
+            var model = that.getOwnerComponent().getModel('Model');          
 
             var oTable = this.byId('myTable');
-            var selectedBooking = oTable.getSelectedIndices();
+            var selectedBookingsIndices = oTable.getSelectedIndices();
 
-            var firstLoop = true;
-
+            
             //check ob eine Buchung ausgewaehlt wurde
-            if(selectedBooking.length > 0){
+            if(selectedBookingsIndices.length > 0){
 
-                //die ausgewahlten buchungen in der tabelle und dem model wiederfinden und herausloschen
-                for(let i = 0; i < selectedBooking.length; i++){
+                //durch ausgewaehlte buchungen loopen und loeschen
+                for(var i= 0; i < selectedBookingsIndices.length; i++){
+                    let oContext = oTable.getContextByIndex(selectedBookingsIndices[i])
+                    let object = oContext.getObject();
 
-                    if(firstLoop){
-                        var selectedContext = oTable.getContextByIndex(selectedBooking[i]);
-                        firstLoop = false;
-                    }else {
-                        var selectedContext = oTable.getContextByIndex(selectedBooking[i-1]);
-                    }
-                    
-                    var selectedData = selectedContext.getObject();
-                
-                    var aData = model.getData();
-                    var index = aData.indexOf(selectedData);
-                    aData.splice(index, 1);
-                    model.setData(aData)
-                    oTable.getBinding('rows').refresh();
+                    let booking = object.bookingid;
+
+                    //booking aus model entfernen
+                    model.remove(`/BOOKINGS(${booking})`, {
+                        method: 'DELETE',
+                        success: (data) => {
+                            console.log('erfolreich aus model geloescht');
+                        },
+                        error: (e) => {
+                            console.log('fehler beim loeschen aus model')
+                        }
+                    })
+                };
 
 
-                    //FEHLT: daten auch aus globalem model loeschen
-                }
             } else{
                 MessageToast.show('Keine Buchung ausgewählt')
             }

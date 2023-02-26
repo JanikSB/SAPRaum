@@ -6,38 +6,6 @@ controllerName="raumreservierung.controller.NavBar"
 displayBlock="true"
 xmlns:tnt="sap.tnt"> 
      <tnt:ToolPage id="toolPage">
-		
-		<!-- <tnt:header>
-			<tnt:ToolHeader>
-				<Image height="1.5rem"
-					   class="sapUiSmallMarginBegin"
-					   src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg" />
-
-				<Title level="H1" text="Raumreservierung">
-					<layoutData>
-						<OverflowToolbarLayoutData shrinkable="true" />
-					</layoutData>
-				</Title>
-				
-				<ToolbarSpacer>
-					<layoutData>
-						<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="20px" />
-					</layoutData>
-				</ToolbarSpacer>
-
-				<tnt:ToolHeaderUtilitySeparator />
-
-				<OverflowToolbarButton text="Notifications" tooltip="Notifications" icon="sap-icon://bell" type="Transparent" />
-				<Avatar src="test-resources/sap/tnt/images/John_Miller.png"
-						displaySize="XS">
-					<layoutData>
-						<OverflowToolbarLayoutData priority="NeverOverflow" />
-					</layoutData>
-				</Avatar>
-
-			</tnt:ToolHeader>
-		</tnt:header> -->
-
 
 		<tnt:subHeader>
 				<IconTabBar headerMode="Inline" select=".onSelectWindow" class="sapUiResponsiveContentPadding" expandable="false" expanded="false">

@@ -22,19 +22,19 @@
 
                             <content>
                                 <Text xmlns="sap.m" id="text1_1668001937845" text="{i18n>userName}" class="sapUiTinyMarginTop"/>
-                                <Input xmlns="sap.m" id="input0_1668001901012" placeholder="Benutzername"/>
+                                <Input xmlns="sap.m" id="registerUsername" placeholder="Benutzername"/>
 
                                 <Text id="text0" text="{i18n>email}" class="sapUiTinyMarginTop"/>
                                 <Input xmlns="sap.m" id="registerEmail" type="Email" placeholder="sample@email.com"/>
 
                                 <Text xmlns="sap.m" text="{i18n>passwort}" id="text1" class="sapUiTinyMarginTop"/>
-                                <Input xmlns="sap.m" id="registerPasswort" required="true" placeholder="Passwort"/>
+                                <Input xmlns="sap.m" id="registerPassword" required="true" placeholder="Passwort"/>
 
                                 <Text xmlns="sap.m" id="text5" text="{i18n>passwortRegBe}" class="sapUiTinyMarginTop"/>
-                                <Input xmlns="sap.m" id="input0" placeholder="Passwort bestätigen"/>
+                                <Input xmlns="sap.m" id="registerPasswordConfirm" placeholder="Passwort bestätigen"/>
 
                                 <HBox width="100%" justifyContent="Center" class="sapUiTinyMarginTop">
-                                    <Button xmlns="sap.m" id="registerButton" width="auto" text="{i18n>registerButton}" type="Emphasized" class="sapUiTinyMarginTop"/>
+                                    <Button xmlns="sap.m" id="registerButton" width="auto" text="{i18n>registerButton}" type="Emphasized" class="sapUiTinyMarginTop" press="register"/>
                                 </HBox>
 
                                 <Toolbar width="auto" height="1px" class="sapUiSmallMargin"/>

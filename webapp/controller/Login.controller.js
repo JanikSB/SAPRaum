@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    'jquery.sap.storage'
-], function(Controller, jQuery) {
+    'jquery.sap.storage',
+    'sap/m/MessageToast'
+], function(Controller, jQuery, MessageToast) {
     'use strict';
 
     var oRouter;
@@ -66,6 +67,10 @@ sap.ui.define([
                             oRouter.navTo('raumbuchung');
 
                         }
+                    }
+
+                    if(checked == false){
+                        MessageToast.show('Anmeldedaten stimmen nicht überein')
                     }
 
                 },
