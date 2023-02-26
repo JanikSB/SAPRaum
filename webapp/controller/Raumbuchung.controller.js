@@ -55,26 +55,26 @@ sap.ui.define([
           oRowsLoadedPromise.then(function() {
             oModel.read("/BOOKINGS", {
                 success: function(oData) {
-                    var aAppointments = oData.results;
-                    var aRows = oPlanningCalendar.getRows();
-                    for (var i = 0; i < aAppointments.length; i++) {
-                        var oAppointment = aAppointments[i];
-                        for (var j = 0; j < aRows.length; j++) {
-                            var oRow = aRows[j];
-                            var oBindingContext = oRow.getBindingContext("Model");
-                            var sRowRaumnummer = oBindingContext.getProperty("raumnummer");
-                            if (oAppointment.raumnummer === sRowRaumnummer) {
-                                var oNewAppointment = new CalendarAppointment({
-                                    startDate: oAppointment.datetimefrom,
-                                    endDate: oAppointment.datetimeto,
-                                    title: oAppointment.bookername
-                                });
-                                oRow.addAppointment(oNewAppointment);
-                                break;
-                            }
-                        }
-                    }
-                    oPlanningCalendar.invalidate();
+                  var aAppointments = oData.results;
+                  var aRows = oPlanningCalendar.getRows();
+                  for (var i = 0; i < aAppointments.length; i++) {
+                      var oAppointment = aAppointments[i];
+                      for (var j = 0; j < aRows.length; j++) {
+                          var oRow = aRows[j];
+                          var oBindingContext = oRow.getBindingContext("Model");
+                          var sRowRaumnummer = oBindingContext.getProperty("raumnummer");
+                          if (oAppointment.raumnummer === sRowRaumnummer) {
+                              var oNewAppointment = new CalendarAppointment({
+                                  startDate: oAppointment.datetimefrom,
+                                  endDate: oAppointment.datetimeto,
+                                  title: oAppointment.bookername
+                              });
+                              oRow.addAppointment(oNewAppointment);
+                              break;
+                          }
+                      }
+                  }
+                  oPlanningCalendar.invalidate();
                 },
                 error: function(oError) {
                     console.log("Error reading appointments data: " + oError);
@@ -82,6 +82,7 @@ sap.ui.define([
             });
           })
         },
+
 
 
         bookRoom(){
@@ -181,6 +182,25 @@ sap.ui.define([
           MessageToast.show('Buchung erfolgreich!');
           newId ++;
 
+          var oPlanningCalendar = this.byId("raumKalender");
+          var aRows = oPlanningCalendar.getRows();
+          for(var i=0; i< aRows.length; i++){
+            var oRow = aRows[i];
+            var oBindingContext = oRow.getBindingContext("Model");
+            var sRowRaumnummer = oBindingContext.getProperty("raumnummer");
+
+            if(room == sRowRaumnummer){
+              var oNewAppointment = new CalendarAppointment({
+                startDate: from,
+                endDate: to,
+                title: localName
+              });
+              oRow.addAppointment(oNewAppointment);
+              break;
+            }
+          }
+
+          oPlanningCalendar.invalidate();
         },
 
         getBookings(){
