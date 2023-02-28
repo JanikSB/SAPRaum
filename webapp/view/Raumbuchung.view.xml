@@ -35,20 +35,27 @@
 
                 <VBox id="buchungRechts" width="60%" height="80%" justifyContent="Center">
                     <items>
-                        <PlanningCalendar id='raumKalender' rows='{path: "Model>/ROOMS"}' appointmentsVisualization="Filled" showWeekNumbers="true" height="100%" builtInViews="Hour,Day" >
+                        <PlanningCalendar id='raumKalender' appointmentsVisualization="Filled" showWeekNumbers="true" height="100%" builtInViews="Hour,Day" >
                             <toolbarContent>
                                 <Title text='Buchungsübersicht' />
                             </toolbarContent>
 
                             <rows>
-                                <PlanningCalendarRow title="Raum {Model>raumnummer}" appointments='{
-                                    path: "Model>/BOOKINGS",
-                                    filters: [{path: "raumnummer", operator: "EQ", value1: "{= ${Model>raumnummer} }"}]
-                                    }'>
-                                    <appointments>
-                                        <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
-                                    </appointments>
-                                </PlanningCalendarRow>
+                                <PlanningCalendarRow title="Raum 1" appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '1'}]}">
+            <appointments>
+                <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
+            </appointments>
+        </PlanningCalendarRow>
+        <PlanningCalendarRow title="Raum 2" appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '2'}]}">
+            <appointments>
+                <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
+            </appointments>
+        </PlanningCalendarRow>
+        <PlanningCalendarRow title="Raum 3" appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '3'}]}">
+            <appointments>
+                <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
+            </appointments>
+        </PlanningCalendarRow>
                             </rows>
                         </PlanningCalendar>
                     </items>
