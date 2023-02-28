@@ -41,7 +41,13 @@
                             </toolbarContent>
 
                             <rows>
-                                <PlanningCalendarRow title="Raum{Model>raumnummer}" >
+                                <PlanningCalendarRow title="Raum {Model>raumnummer}" appointments='{
+                                    path: "Model>/BOOKINGS",
+                                    filters: [{path: "raumnummer", operator: "EQ", value1: "{= ${Model>raumnummer} }"}]
+                                    }'>
+                                    <appointments>
+                                        <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
+                                    </appointments>
                                 </PlanningCalendarRow>
                             </rows>
                         </PlanningCalendar>

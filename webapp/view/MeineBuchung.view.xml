@@ -17,11 +17,11 @@
                             <m:FacetFilterItem text="2" key="2"/>
                             <m:FacetFilterItem text="3" key="3"/>
                         </m:FacetFilterList>
-                        <m:FacetFilterList title="Status" listClose="onFilter" >
+                        <!-- <m:FacetFilterList title="Status" listClose="onFilter" >
                             <m:FacetFilterItem text="laufend" key="läuft"/>
                             <m:FacetFilterItem text="abgelaufen" key="abgelaufen"/>
                             <m:FacetFilterItem text="gebucht" key="gebucht"/>
-                        </m:FacetFilterList>
+                        </m:FacetFilterList> -->
                     </m:FacetFilter>
                 </m:HBox>
             </extension>
