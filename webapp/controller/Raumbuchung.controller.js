@@ -2,10 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     'sap/ui/model/json/JSONModel',
     'sap/m/MessageToast',
-    "sap/ui/unified/CalendarAppointment",
+    "sap/ui/unified/CalendarAppointment"
 
-    "sap/ui/model/Filter"
-], function(Controller, JSONModel, MessageToast, CalendarAppointment, Filter) {
+], function(Controller, JSONModel, MessageToast, CalendarAppointment) {
     'use strict';
 
     var oModel;
@@ -42,7 +41,11 @@ sap.ui.define([
         },
 
       
-
+        onAppointmentSelect(oEvent){
+          var test = oEvent.getParameter('appointment');
+          var test1 = test.getTitle();
+          MessageToast.show(test1)
+        },
         
 
 
