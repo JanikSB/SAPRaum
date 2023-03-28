@@ -1,36 +1,39 @@
-<mvc:View xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.ui.table" controllerName="raumreservierung.controller.MeineBuchung" displayBlock="true">
-    <m:Page showHeader="false" id="page">
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table" controllerName="raumreservierung.controller.MeineBuchung" displayBlock="true">
+    <Page showHeader="false" id="page" 
+    >
         <mvc:XMLView viewName="raumreservierung.view.NavBar" class="navBarB" />
 
-        <Table id="myTable" class="sapUiResponsiveMargin" visibleRowCount="10" width="" selectionMode="MultiToggle" >
-    
 
-            <extension>
-                <m:HBox>
-                    <m:items>
-                        <m:Title text="Meine Buchungen" titleStyle="H3" class="sapUiTinyMarginBeginEnd"/>
-                    </m:items>
+        <content>
+            <table:Table id="myTable" class="sapUiResponsiveMargin" visibleRowCount="10" width="" selectionMode="MultiToggle" >
+        
 
-                    <m:FacetFilter id="filter" showReset="false">
-                        <m:FacetFilterList title="Raumnummer" listClose="onFilter">
-                            <m:FacetFilterItem text="1" key="1"/>
-                            <m:FacetFilterItem text="2" key="2"/>
-                            <m:FacetFilterItem text="3" key="3"/>
-                        </m:FacetFilterList>
-                        <!-- <m:FacetFilterList title="Status" listClose="onFilter" >
-                            <m:FacetFilterItem text="laufend" key="läuft"/>
-                            <m:FacetFilterItem text="abgelaufen" key="abgelaufen"/>
-                            <m:FacetFilterItem text="gebucht" key="gebucht"/>
-                        </m:FacetFilterList> -->
-                    </m:FacetFilter>
-                </m:HBox>
-            </extension>
-      
-        </Table>
+                <table:extension>
+                    <HBox>
+                        <items>
+                            <Title text="Meine Buchungen" titleStyle="H3" class="sapUiTinyMarginBeginEnd"/>
+                        </items>
 
+                        <FacetFilter id="filter" showReset="false">
+                            <FacetFilterList title="Raumnummer" listClose="onFilter">
+                                <FacetFilterItem text="1" key="1"/>
+                                <FacetFilterItem text="2" key="2"/>
+                                <FacetFilterItem text="3" key="3"/>
+                            </FacetFilterList>
+                        </FacetFilter>
+                    </HBox>
+                </table:extension>
+        
+            </table:Table>
+        </content>
 
-        <m:Button text="Buchung stornieren" class='sapUiMediumMargin' press="onCancelBooking"/>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Stornieren" class='sapUiMediumMargin' press="onCancelBooking" type='Reject'/>
+            </OverflowToolbar>
+        </footer>
 
         
-    </m:Page>
+    </Page>
 </mvc:View>

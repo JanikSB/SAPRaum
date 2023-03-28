@@ -93,6 +93,7 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
+        "type": "View",
         "viewType": "XML",
         "async": true,
         "viewPath": "raumreservierung.view",
