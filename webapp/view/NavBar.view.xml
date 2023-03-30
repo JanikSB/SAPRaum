@@ -5,26 +5,17 @@ xmlns:layout= "sap.ui.layout"
 controllerName="raumreservierung.controller.NavBar" 
 displayBlock="true"
 xmlns:tnt="sap.tnt"> 
-     <tnt:ToolPage id="toolPage">
+     
+	<IconTabBar headerMode="Inline" select=".onSelectWindow" class="sapUiResponsiveContentPadding" expandable="false" expanded="false" stretchContentHeight='true'>
+		<items>
+			<IconTabFilter key="raumbuchung" text="Raumbuchung" />
+			<IconTabFilter key="buchungen" text="Meine Buchungen" />
+			<IconTabFilter key="profil" text="Mein Profil" />
 
-		<tnt:subHeader>
-				<IconTabBar headerMode="Inline" select=".onSelectWindow" class="sapUiResponsiveContentPadding" expandable="false" expanded="false">
-						<items>
-							<IconTabFilter key="raumbuchung" text="Raumbuchung" />
-							<IconTabFilter key="buchungen" text="Meine Buchungen" />
-							<IconTabFilter key="profil" text="Mein Profil" />
+			<IconTabSeparator />
 
-							<IconTabSeparator />
-
-							<IconTabFilter key='logout' text="Sign Out" icon='sap-icon://log' class="sapUiLargeMargin"/>
-						</items>
-				</IconTabBar>
-		</tnt:subHeader>
-        
-    </tnt:ToolPage>
-
+			<IconTabFilter key='logout' text="Abmelden" icon='sap-icon://log' iconColor='Negative'/>
+		</items>
+	</IconTabBar>
 	
-
-    
-    
 </mvc:View>

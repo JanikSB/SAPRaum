@@ -1,11 +1,10 @@
 <mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:table="sap.ui.table" controllerName="raumreservierung.controller.MeineBuchung" displayBlock="true">
-    <Page showHeader="false" id="page" 
-    >
+    <Page showHeader="false" id="page">
         <mvc:XMLView viewName="raumreservierung.view.NavBar" class="navBarB" />
 
 
         <content>
-            <table:Table id="myTable" class="sapUiResponsiveMargin" visibleRowCount="10" width="" selectionMode="MultiToggle" >
+            <!-- <table:Table id="myTable" class="sapUiResponsiveMargin" visibleRowCount="10" width="" selectionMode="MultiToggle" >
         
 
                 <table:extension>
@@ -24,11 +23,57 @@
                     </HBox>
                 </table:extension>
         
-            </table:Table>
+            </table:Table> -->
+
+            
+            <Table 
+                mode='MultiSelect'
+                id='myTable'
+                inset='true'
+                
+                >
+
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text='Meine Buchungen' level='H2'/>
+                        <ToolbarSpacer/>
+                        <FacetFilter id="filter" showReset="false">
+                            <FacetFilterList title="Raumnummer" listClose="onFilter">
+                                <FacetFilterItem text="1" key="1"/>
+                                <FacetFilterItem text="2" key="2"/>
+                                <FacetFilterItem text="3" key="3"/>
+                            </FacetFilterList>
+                        </FacetFilter>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column width='12rem'>
+                        <Text text='Raumnummer'/>
+                    </Column>
+
+                    <Column minScreenWidth='Tablet' demandPopin='true'>
+                        <Text text='Von'/>
+                    </Column>
+
+                    <Column minScreenWidth='Tablet' demandPopin='true'>
+                        <Text text='Bis'/>
+                    </Column>
+
+                    <Column minScreenWidth='Tablet' demandPopin='true' hAlign='Middle'>
+                        <Text text='Status' />
+                    </Column>
+
+                    <Column visible='false'>
+                        <Text text='Buchungsnummer'/>
+                    </Column>
+                </columns>
+
+            </Table>
         </content>
 
         <footer>
-            <OverflowToolbar>
+            <OverflowToolbar class='sapUiTinyMargin'>
                 <ToolbarSpacer/>
                 <Button text="Stornieren" class='sapUiMediumMargin' press="onCancelBooking" type='Reject'/>
             </OverflowToolbar>
