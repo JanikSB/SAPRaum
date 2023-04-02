@@ -16,18 +16,6 @@
                         <Label text="{i18n>selectZeitBis}" labelFor="selectBis" />
                         <DateTimePicker id="selectBis" displayFormat="dd.MM.yy HH" class="sapUiSmallMarginBottom" width="50%" required="true" />
 
-                        <!-- <Title text="{i18n>selectArbeit}" /> -->
-                        <!-- <HBox width="100%" justifyContent="SpaceBetween">
-                            <Select id="selectArbeit" autoAdjustWidth="true" class='sapUiSmallMarginLeft'>
-                                <core:ListItem text="Büroarbeit" key="bueroarbeit" />
-                                <core:ListItem text="Präsentation" key="praesentation" />
-                            </Select>
-                            <Switch state="true" customTextOn=" " customTextOff=" " change="switch">
-                                <layoutData>
-                                    <FlexItemData growFactor="1" maxWidth="60%" />
-                                </layoutData>
-                            </Switch>
-                        </HBox> -->
 
                         <Button text="{i18n>knopfBuchen}" type="Emphasized" class='sapUiLargeMarginTop' press="bookRoom" />
                     </items>

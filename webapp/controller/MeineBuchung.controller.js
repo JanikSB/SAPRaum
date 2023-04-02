@@ -5,16 +5,10 @@ sap.ui.define([
     'sap/m/MessageToast',
     "sap/ui/core/format/DateFormat",
 
-
-    "sap/ui/commons/Label",
-    "sap/ui/commons/TextView",
-    "sap/ui/table/Column",
-
-
     'sap/m/ColumnListItem',
     'sap/m/Text',
     'sap/m/ObjectIdentifier'
-], function (Controller, Filter, FilterOperator, MessageToast, DateFormat, Label, TextView, Column, ColumnListItem, Text, ObjectIdentifier) {
+], function (Controller, Filter, FilterOperator, MessageToast, DateFormat, ColumnListItem, Text, ObjectIdentifier) {
     'use strict';
 
 
@@ -84,73 +78,6 @@ sap.ui.define([
         },
 
 
-
-
-
-
-
-        //tabelle mit eigenen buchungen fuellen
-
-        // readBookings(){
-
-        //     var oTable = this.getView().byId('myTable');
-
-        //     oTable.bindRows({
-        //         path: "Model>/BOOKINGS",
-        //         //set the filter for the bookername property
-        //         filters: [
-        //             new Filter("bookername", FilterOperator.EQ, localName)
-        //         ],
-        //         parameters: {
-        //             //set the count mode to inline to get the number of records for paging
-        //             countMode: 'Inline'
-        //         }
-        //     });
-
-        //     oTable.addColumn(new Column({
-        //         label: new Label({text: "Raumnummer"}),
-        //         template: new TextView({
-        //             text: '{Model>raumnummer}'})
-        //     }));
-            
-        //     //add a column for the 'datetimefrom' property
-        //     oTable.addColumn(new Column({
-        //         label: new Label({text: "Von"}),
-        //         template: new TextView({
-        //             text: 
-        //             {parts: [{path: 'Model>datetimefrom'}],
-        //             formatter: that.dateFormatter.bind(this)
-        //         }})
-        //     }));
-            
-        //     //add a column for the 'datetimeto' property
-        //     oTable.addColumn(new Column({
-        //         label: new Label({text: "Bis"}),
-        //         template: new TextView({
-        //             text: 
-        //             {parts: [{path: 'Model>datetimeto'}],
-        //             formatter: that.dateFormatter.bind(this)
-        //         }})
-        //     }));
-
-        //     oTable.addColumn(new Column({
-        //         label: new Label({text: 'Status'}),
-        //         template: new TextView({
-        //             text:
-        //             {parts: ['Model>datetimefrom', 'Model>datetimeto'],
-        //             formatter: (datetimefrom, datetimeto) => {
-        //                 return that.statusFormatter(datetimefrom, datetimeto);
-        //             }
-        //         }})
-        //     }))
-
-        //     oTable.addColumn(new Column({
-        //         label: new Label({text: 'Buchungsnummer'}),
-        //         template: new TextView({
-        //             text: '{Model>bookingid}'}),
-        //         visible: false
-        //     }))
-        // },
 
         //datum zu lesbarem string formattieren
         

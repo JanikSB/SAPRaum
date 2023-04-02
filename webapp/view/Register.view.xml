@@ -2,7 +2,7 @@
     <Page title="Register">
         <HBox width="100%" id="registerHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center">
             <items>
-                <VBox width="40%" direction="Column" id="registerVBox" height="100%" justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" alignContent="Center" >
+                <VBox direction="Column" id="registerVBox" height="100%" justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" alignContent="Center" >
                     <items>
                         <Title text="{i18n>welcomeReg}" level="H1" textAlign="Center" titleStyle="H1" class="sapUiSmallMarginBottom"/>
                         <Panel xmlns="sap.m" id="registerPanel" backgroundDesign="Solid" height="100%" expanded="true">
