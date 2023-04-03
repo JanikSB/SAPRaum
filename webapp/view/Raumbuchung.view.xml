@@ -1,54 +1,66 @@
-<mvc:View xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="raumreservierung.controller.Raumbuchung" displayBlock="true">
+<mvc:View xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="raumreservierung.controller.Raumbuchung" displayBlock="true">
     <Page showHeader="false" id="raumbuchungPage">
-        <mvc:XMLView viewName="raumreservierung.view.NavBar" id="mcvNavBar" />
-        <HBox width="100%" id="raumbuchungHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="SpaceAround">
-            <items>
-                <VBox id="buchungLinks" width="30%" class='sapUiMediumMarginLeft'>
-                    <items>
-                        <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" id="titleRaumauswahl" />
-                        <Select id="selectRaum" showSecondaryValues="true" items="{path: 'Model>/ROOMS'}" autoAdjustWidth="true">
-                            <core:ListItem text="Raum {Model>raumnummer}" additionalText="Plätze: {Model>platzanzahl}, &#10; Inhalt: {Model>inhalt}" />
-                        </Select>
+        <mvc:XMLView viewName="raumreservierung.view.NavBar" class='navBarB' />
 
-                        <Title text="{i18n>selectZeit}" class="sapUiSmallMarginTop" />
-                        <Label text="{i18n>selectZeitVon}" labelFor="selectVon" />
-                        <DateTimePicker id="selectVon" displayFormat="dd.MM.yy HH" width="50%" required="true" change="onSelectVon" />
-                        <Label text="{i18n>selectZeitBis}" labelFor="selectBis" />
-                        <DateTimePicker id="selectBis" displayFormat="dd.MM.yy HH" class="sapUiSmallMarginBottom" width="50%" required="true" />
+        <content>
+            <l:VerticalLayout>
+                <l:Grid defaultSpan='XL3 L6 M6 S12'>
+
+                    <VBox renderType='Bare' alignItems='stretch' id='vbox'>
+                        <items>
+                            <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" id="titleRaumauswahl" />
+                            <Select id="selectRaum" showSecondaryValues="true" items="{path: 'Model>/ROOMS'}" autoAdjustWidth="true">
+                                <core:ListItem text="Raum {Model>raumnummer}" additionalText="Plätze: {Model>platzanzahl}, &#10; Inhalt: {Model>inhalt}" />
+                            </Select>
+
+                            <Title text="{i18n>selectZeit}" class="sapUiSmallMarginTop" />
+                            <Label text="{i18n>selectZeitVon}" labelFor="selectVon" />
+                            <DateTimePicker id="selectVon" displayFormat="dd.MM.yy HH" width="50%" required="true" change="onSelectVon" />
+                            <Label text="{i18n>selectZeitBis}" labelFor="selectBis" />
+                            <DateTimePicker id="selectBis" displayFormat="dd.MM.yy HH" class="sapUiSmallMarginBottom" width="50%" required="true" />
+
+                            <Button text="{i18n>knopfBuchen}" type="Emphasized" press="bookRoom"/>
+
+                            
+
+                        </items>
+                        <core:HTML>
+                            <core:layoutData>
+                                <l:GridData
+                                        linebreakM="true"/>
+                            </core:layoutData>
+			        	</core:HTML>
+                    </VBox>
 
 
-                        <Button text="{i18n>knopfBuchen}" type="Emphasized" class='sapUiLargeMarginTop' press="bookRoom" />
-                    </items>
-                </VBox>
 
-                <VBox id="buchungRechts" width="60%" height="80%" justifyContent="Center">
-                    <items>
-                        <PlanningCalendar id='raumKalender' appointmentsVisualization="Filled" showWeekNumbers="true" height="100%" builtInViews="Hour,Day" appointmentSelect='onAppointmentSelect'>
-                            <toolbarContent>
-                                <Title text='Buchungsübersicht' />
-                            </toolbarContent>
 
-                            <rows>
-                                <PlanningCalendarRow title="Raum 1" appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '1'}]}">
-                                    <appointments>
-                                        <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}"/>
-                                    </appointments>
-                                </PlanningCalendarRow>
-                                <PlanningCalendarRow title="Raum 2" appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '2'}]}">
-                                    <appointments>
-                                        <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
-                                    </appointments>
-                                </PlanningCalendarRow>
-                                <PlanningCalendarRow title="Raum 3" appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '3'}]}">
-                                    <appointments>
-                                        <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
-                                    </appointments>
-                                </PlanningCalendarRow>
-                            </rows>
-                        </PlanningCalendar>
-                    </items>
-                </VBox>
-            </items>
-        </HBox>
+
+                    <PlanningCalendar id='raumKalender' appointmentsVisualization="Filled" showWeekNumbers="true" builtInViews="Hour,Day" appointmentSelect='onAppointmentSelect'>
+                        <toolbarContent>
+                            <Title text='Buchungsübersicht' />
+                        </toolbarContent>
+
+                        <rows>
+                            <PlanningCalendarRow title="Raum 1" icon='sap-icon://meeting-room' appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '1'}]}">
+                                <appointments>
+                                    <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}"/>
+                                </appointments>
+                            </PlanningCalendarRow>
+                            <PlanningCalendarRow title="Raum 2" icon='sap-icon://laptop' appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '2'}]}">
+                                <appointments>
+                                    <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
+                                </appointments>
+                            </PlanningCalendarRow>
+                            <PlanningCalendarRow title="Raum 3" icon='sap-icon://laptop' appointments="{path: 'Model>/BOOKINGS', filters: [{path: 'raumnummer', operator: 'EQ', value1: '3'}]}">
+                                <appointments>
+                                    <unified:CalendarAppointment startDate="{Model>datetimefrom}" endDate="{Model>datetimeto}" title="Gebucht von {Model>bookername}" />
+                                </appointments>
+                            </PlanningCalendarRow>
+                        </rows>
+                    </PlanningCalendar>
+                </l:Grid>
+            </l:VerticalLayout>
+        </content>
     </Page>
 </mvc:View>
