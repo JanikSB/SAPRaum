@@ -4,9 +4,9 @@
 
         <content>
             <l:VerticalLayout>
-                <l:Grid defaultSpan='XL3 L6 M6 S12'>
+                <l:Grid defaultSpan='XL6 L6 M6 S12'>
 
-                    <VBox renderType='Bare' alignItems='stretch' id='vbox'>
+                    <VBox renderType='Bare' alignItems='Stretch' id='vbox'>
                         <items>
                             <Title text="{i18n>selectRaum}" class="sapUiSmallMarginTop" id="titleRaumauswahl" />
                             <Select id="selectRaum" showSecondaryValues="true" items="{path: 'Model>/ROOMS'}" autoAdjustWidth="true">
