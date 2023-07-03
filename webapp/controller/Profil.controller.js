@@ -8,11 +8,13 @@ sap.ui.define([
     'use strict';
 
     var localId;
+    var oRouter;
 
     return Controller.extend('raumreservierung.controller.Profil', {
         
 
         onInit(oEvent) {
+            oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
             var object = this;
 

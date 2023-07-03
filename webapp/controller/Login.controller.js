@@ -17,6 +17,8 @@ sap.ui.define([
 
             if(oStore.get('logUser') !== null){
                 oRouter.navTo('raumbuchung');
+
+                location.reload();
             }
         },
 
@@ -66,6 +68,7 @@ sap.ui.define([
                             
                             oRouter.navTo('raumbuchung');
 
+                            location.reload();
                         }
                     }
 

@@ -2,7 +2,7 @@
     <Page title="Login" id="loginPage">
         <HBox width="100%" id="loginHBox" height="100%" alignItems="Center" alignContent="Center" justifyContent="Center">
             <items>
-                <VBox  direction="Column" id="loginVBox" height="100%" justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" alignContent="Center">
+                <VBox  direction="Column" id="loginVBox" height="100%" width="60%" justifyContent="Center" alignItems="Center" class="sapUiSmallMargin" alignContent="Center">
                     <items>
                         <Title text="{i18n>welcomeLogin}" level="H1" textAlign="Center" titleStyle="H1" class="sapUiSmallMarginBottom" />
                         <Panel xmlns="sap.m" id="loginPanel" backgroundDesign="Solid" height="100%" expanded="true">
@@ -12,7 +12,7 @@
                                         <Image src="https://ui5.sap.com/resources/sap/ui/documentation/sdk/images/logo_sap.png" width="auto" id="image0" height="80%" />
                                     </content>
 
-                                    <ToolbarSpacer width="28%" />
+                                    <ToolbarSpacer width="10%" />
 
                                     <Title text="{i18n>login}" />
 

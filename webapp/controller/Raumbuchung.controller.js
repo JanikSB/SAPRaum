@@ -22,6 +22,7 @@ sap.ui.define([
     return Controller.extend('raumreservierung.controller.Raumbuchung', {
 
         onInit(){
+
           oModel = this.getOwnerComponent().getModel('Model');
           that = this;
           var oStore = jQuery.sap.storage(jQuery.sap.storage.Type.local);
@@ -160,6 +161,8 @@ sap.ui.define([
                 },
                 error: function (oError) {            
                     reject(oError);
+
+                    location.reload();
                 }
             });       
           })
@@ -208,6 +211,8 @@ sap.ui.define([
             },
             error: function (oError) {            
                 console.log(oError);
+
+                location.reload();
             }
           })
         }
