@@ -9,7 +9,7 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertError: true # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         ui5:
           path:
             - /resources
@@ -17,8 +17,7 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /v2/srv
-            url: https://c8568f49trial-dev-myappodata1-srv.cfapps.us10.hana.ondemand.com
-            destination: HanaCloud
+            url: https://0f11ab8ctrial-dev-myappodata-srv.cfapps.us10-001.hana.ondemand.com
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
